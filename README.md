@@ -1,47 +1,51 @@
 # Hola Mundo con Node.Js
 Este es una simple prueba de como utilizae node.js
 
-* En la terminal utilizamos el siguiente comando para poder instalar el siguiente paquete, que nos serviŕa para instalar node.js:
+* Primeramente utilizamos el suguiente comando:
 ```
-$ sudo apt-get install python-software-properties python g++ make
+$ npm init --yes
 ```
-Nos pedirá nuestra contraseña. 
+* Servirá para crear el package.json, el cual va a quedar reflejada la configuración del proyecto de Node.js.
 
-## Instalar node.js y 
-* Posterior a la instalación del paquete, colocámos el siguiente comando:
+## Instalar modulos y crear el servidor con Express
+* Posterior a la instalación, realizamos la instalación de los módulos express utilizando:
 ```
-$ sudo apt-get install nodejs npm
+$ npm install express
 ```
-* Hacer un update del sistema:
+* Ahora creamos un servidor, instanciando Express:
 ```
-$ sudo apt-get update
-```
-* Con el siguiente código, que se puede encontrar desde la página oficial de Node.js podemos verificar si tiene un correcto funcionamiento:
-```
-const http = require('http');
-
-const hostname = '127.0.0.1';
-const port = 3000;
-
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello, World!\n');
-});
-
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+const express = require('express');
+const app = express();
+app.listen(3000);
 
 ```
-* Lo guardamos en una carpeta llamada node y el archivo con el nombre app.js
+* Si verificamos recibiremos una petición (Cannot GET /)
 
-# Verficación
-* Ejecutamos:
+* Para devolver un mensaje se utiliza el request (Solicitud) y Response (Respuesta):  
 ```
-cd node
-cd node app.js
-```
-* Posterior a esto ejecutará nuestro localhost, lo verificamos en nuestro navegador ingresando lo siguiente:
+  app.get('/', (req,res) => {
+  res.end('Hello world');
 
-http://localhost:3000/
+```
+* Para que devuelva un mensaje finalizamos la respuesta con un Hello world.
+
+* Si queremos enviar un mensaje cuando el servidor este en función, podemos realizar lo siguiente:
+
+```
+  app.listen(3000, () => {
+  console.log('Servidor funcionando');
+
+```
+## Verficación
+
+* En el archivo package.json agregamos el siguiente script:
+
+```
+ "start": "node app.js"
+```
+* Sirve para poder ejecutar nuestro archivo app.js utilizando el siguiente comando:
+```
+ npm start
+
+```
+Y nuestra aplicación funcionará correctamente en el http://localhost:3000/
